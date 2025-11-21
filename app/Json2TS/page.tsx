@@ -79,7 +79,7 @@ function capitalize(str: string) {
 
 // --- UI 组件区域 (View) ---
 
-export default function TypeCraftTool() {
+export default function Json2TSTool() {
   const [jsonInput, setJsonInput] = useState('');
   const [tsOutput, setTsOutput] = useState('');
   const [error, setError] = useState('');
@@ -141,13 +141,13 @@ export default function TypeCraftTool() {
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-800 font-sans selection:bg-indigo-100">
-      {/* 顶部导航 - 已更新品牌名为 TypeCraft */}
+      {/* 顶部导航 - 已更新品牌名为 Json2TS */}
       <nav className="bg-white border-b border-slate-200 px-6 py-4 flex justify-between items-center shadow-sm">
         <div className="flex items-center space-x-2">
           <div className="bg-indigo-600 p-1.5 rounded-lg shadow-indigo-200 shadow-md transform rotate-3">
             <Hammer className="w-5 h-5 text-white" />
           </div>
-          <span className="text-xl font-bold text-slate-800 tracking-tight">TypeCraft</span>
+          <span className="text-xl font-bold text-slate-800 tracking-tight">Json2TS</span>
         </div>
         <div className="flex items-center space-x-4">
           <span className="text-xs font-medium text-slate-400 hidden sm:inline-block">JSON to TypeScript Converter</span>
@@ -161,7 +161,7 @@ export default function TypeCraftTool() {
         {/* 标题区域 - 更新 Slogan */}
         <div className="text-center mb-10 mt-4">
           <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-4 tracking-tight">
-            Type<span className="text-indigo-600">Craft</span>
+            Json<span className="text-indigo-600">2Ts</span>
           </h1>
           <p className="text-slate-500 text-lg max-w-2xl mx-auto leading-relaxed">
             瞬间将杂乱的 JSON “锻造”为完美的 TypeScript 类型定义。<br/>
@@ -279,7 +279,7 @@ export default function TypeCraftTool() {
             </div>
             
             <h3 className="text-xl font-bold text-slate-800 mb-3 relative z-10">
-              TypeCraft 帮你省下时间了吗？
+              Json2TS 帮你省下时间了吗？
             </h3>
             <p className="text-slate-600 mb-8 relative z-10">
               如果这个工具让你不用再手写那些繁琐的 interface，<br/>
@@ -298,7 +298,7 @@ export default function TypeCraftTool() {
           </div>
           
           <p className="text-center text-slate-400 text-xs mt-8">
-            TypeCraft © 2023 · Developed with ❤️ by FrontEndHacker
+            Json2TS © 2023 · Developed with ❤️ by FrontEndHacker
           </p>
         </div>
       </main>
