@@ -224,27 +224,25 @@ type BlogPost = {
 const PROJECTS: Project[] = [
   {
     id: 1,
-    title: "Nebula Dashboard",
-    description: "下一代电商数据可视化平台，支持千万级数据实时渲染。利用 WebWorker 进行数据预处理，通过 WebGL 实现高性能图表绘制。",
-    tags: ["React", "WebGL", "Rust", "D3.js"],
-    link: "#",
+    title: "Json2TS",
+    description: "JSON 转 TypeScript 接口 (Interface)",
+    tags: ["React", "TypeScript"],
+    link: "/Json2TS",
     github: "#",
     color: "from-purple-500 to-indigo-500",
     content: `
       <h3>项目背景</h3>
-      <p>在处理千万级别的电商大促数据时，传统的 DOM 图表方案会导致浏览器主线程阻塞，页面卡顿严重。Nebula Dashboard 旨在解决这一性能瓶颈。</p>
-      
-      <h3>技术挑战</h3>
+      <p>在多人协作的前端项目中，后端返回的 JSON 常常结构复杂，手写接口既耗时又容易遗漏字段。Json2TS 旨在提供一个“复制 JSON 即得类型”的一键式工具。</p>
+
+      <h3>功能亮点</h3>
       <ul>
-        <li><strong>海量数据渲染：</strong> 如何在 16ms 内渲染 10万+ 数据点？</li>
-        <li><strong>数据计算阻塞：</strong> 复杂的数据聚合计算会占用 UI 线程。</li>
+        <li><strong>递归解析：</strong> 自动深入对象与数组，生成层级化 Interface，并确保命名可读。</li>
+        <li><strong>智能推断：</strong> 区分基础类型、对象、对象数组，对缺失结构自动回退为 <code>any</code>。</li>
+        <li><strong>一键复制：</strong> 内置剪贴板操作，生成后直接复制到代码库。</li>
       </ul>
 
-      <h3>解决方案</h3>
-      <p>我们采用 <strong>Rust + WebAssembly</strong> 编写核心计算模块，相比 JS 提升了 4 倍计算效率。渲染层使用自定义 WebGL着色器，配合 <strong>OffscreenCanvas</strong> 在 Worker 线程进行绘制。</p>
-      
-      <h3>成果</h3>
-      <p>最终实现了 60fps 的流畅交互体验，即使在数据量达到 500万条时，首屏加载时间也被控制在 1.5秒以内。</p>
+      <h3>技术栈</h3>
+      <p>使用 React 19 + TypeScript + Tailwind CSS 搭建，核心算法采用纯函数化写法，方便后续封装成 npm 包或独立 API。</p>
     `
   },
   {
@@ -483,7 +481,7 @@ const NavItem = ({ active, onClick, icon: Icon, label, showLabel }: NavItemProps
 const AIChatWidget = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
-    { role: 'assistant', text: '你好！我是 Alex 的 AI 数字助手。你可以问我关于 Alex 的工作经历、项目经验或者技术栈的问题。' }
+    { role: 'assistant', text: '你好！我是 Shaun 的 AI 数字助手。你可以问我关于 Shaun 的工作经历、项目经验或者技术栈的问题。' }
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -508,16 +506,16 @@ const AIChatWidget = () => {
 
     // 构建 System Prompt，注入简历数据
     const systemPrompt = `
-      你现在是 Alex 的个人网站 AI 助手。你的任务是以专业、友好且带有一点点幽默感的口吻，回答访客关于 Alex 的问题。
+      你现在是 Shaun 的个人网站 AI 助手。你的任务是以专业、友好且带有一点点幽默感的口吻，回答访客关于 Shaun 的问题。
       
-      这是 Alex 的背景数据：
+      这是 Shaun 的背景数据：
       - 核心技能：React 19, TypeScript, Next.js, Tailwind, Rust.
       - 工作经历：${JSON.stringify(EXPERIENCE)}
       - 项目经验：${JSON.stringify(PROJECTS)}
       - 提供的服务：${JSON.stringify(SERVICES)}
       
       请遵循以下规则：
-      1. 使用第一人称复数（“我们”）或第三人称（“Alex”）来回答。
+      1. 使用第一人称复数（“我们”）或第三人称（“Shaun”）来回答。
       2. 如果被问到你不知道的问题，请诚实回答，并建议访客通过“联系”页面发送邮件。
       3. 尽量简短精炼，除非用户要求详细解释。
       4. 回答要是中文。
@@ -537,7 +535,7 @@ const AIChatWidget = () => {
           <div className="p-4 bg-indigo-600 text-white flex justify-between items-center">
             <div className="flex items-center gap-2">
               <Bot size={20} />
-              <span className="font-bold">Ask Alex AI ✨</span>
+              <span className="font-bold">Ask Shaun AI ✨</span>
             </div>
             <button onClick={() => setIsOpen(false)} className="hover:bg-indigo-700 p-1 rounded"><X size={18} /></button>
           </div>
@@ -611,7 +609,7 @@ const Footer = () => (
       <a href="#" className="text-zinc-400 hover:text-blue-700 transition-colors"><Linkedin size={20} /></a>
     </div>
     <p className="text-zinc-500 dark:text-zinc-500 text-sm">
-      © {new Date().getFullYear()} Alex.Design. All rights reserved. <br className="sm:hidden"/> Crafted with React & Tailwind.
+      © {new Date().getFullYear()} Shaun. All rights reserved. <br className="sm:hidden"/> Crafted with React & Tailwind.
     </p>
   </footer>
 );
@@ -747,10 +745,10 @@ export default function PersonalWebsite() {
         <div className="glass-panel rounded-full px-2 py-2 flex items-center justify-between shadow-2xl shadow-black/5 dark:shadow-black/50 ring-1 ring-white/20">
           <div className="flex items-center gap-2 pl-3 pr-4 cursor-pointer group" onClick={() => handleTabChange('home')}>
             <div className="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold text-sm shadow-lg group-hover:scale-110 transition-transform shrink-0">
-              A
+              X
             </div>
             {/* 修复逻辑：Logo 文字只在未滚动且屏幕宽度大于 sm 时显示 */}
-            {!scrolled && <span className="hidden sm:inline font-bold text-zinc-800 dark:text-white tracking-tight group-hover:text-indigo-500 transition-colors whitespace-nowrap">Alex.Design</span>}
+            {!scrolled && <span className="hidden sm:inline font-bold text-zinc-800 dark:text-white tracking-tight group-hover:text-indigo-500 transition-colors whitespace-nowrap">Shaun.Blog</span>}
           </div>
 
           <div className="flex items-center gap-1 shrink-0">
@@ -789,7 +787,7 @@ export default function PersonalWebsite() {
               </h1>
               
               <p className="text-lg md:text-xl text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto leading-relaxed">
-                你好，我是 Alex。一名热衷于构建极致体验的前端架构师。
+                你好，我是 Shaun。一名热衷于构建极致体验的前端架构师。
                 <br className="hidden md:block"/>
                 我通过代码与设计的融合，帮助企业和个人将想法转化为现实。
               </p>
@@ -1001,7 +999,7 @@ export default function PersonalWebsite() {
                      A
                    </div>
                 </div>
-                <h2 className="text-4xl font-bold text-zinc-900 dark:text-white mb-4">关于 Alex</h2>
+                <h2 className="text-4xl font-bold text-zinc-900 dark:text-white mb-4">关于 Shaun</h2>
                 <p className="text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed">
                   我是一名拥有 5 年经验的前端工程师。我不仅关注代码的质量，更在意产品背后的人文关怀。
                   <br/>我相信，优秀的技术应该像空气一样，无处不在却又自然无感。
@@ -1103,11 +1101,11 @@ export default function PersonalWebsite() {
             <div className="mt-12 flex justify-center gap-8">
               <div className="flex flex-col items-center gap-2 text-zinc-500">
                 <Mail size={24} className="text-zinc-900 dark:text-white"/>
-                <span className="text-sm">hello@alex.design</span>
+                <span className="text-sm">hello@Shaun</span>
               </div>
               <div className="flex flex-col items-center gap-2 text-zinc-500">
                 <MessageSquare size={24} className="text-zinc-900 dark:text-white"/>
-                <span className="text-sm">@AlexDesign</span>
+                <span className="text-sm">@ShaunDesign</span>
               </div>
             </div>
           </div>
