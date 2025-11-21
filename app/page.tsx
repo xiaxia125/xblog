@@ -185,8 +185,43 @@ const CustomStyles = () => (
   `}</style>
 );
 
+// --- 数据类型 ---
+type Project = {
+  id: number;
+  title: string;
+  description: string;
+  tags: string[];
+  link: string;
+  github: string;
+  color: string;
+  content: string;
+};
+
+type Service = {
+  title: string;
+  desc: string;
+  icon: typeof Globe;
+};
+
+type ExperienceItem = {
+  year: string;
+  role: string;
+  company: string;
+  description: string;
+};
+
+type BlogPost = {
+  id: number;
+  title: string;
+  excerpt: string;
+  date: string;
+  readTime: string;
+  category: string;
+  content: string;
+};
+
 // --- 数据 ---
-const PROJECTS = [
+const PROJECTS: Project[] = [
   {
     id: 1,
     title: "Nebula Dashboard",
@@ -294,14 +329,14 @@ const PROJECTS = [
   }
 ];
 
-const SERVICES = [
+const SERVICES: Service[] = [
   { title: "Web 应用开发", desc: "从零构建高性能、可扩展的单页应用 (SPA) 和全栈解决方案。", icon: Globe },
   { title: "UI/UX 设计", desc: "以用户体验为核心的界面设计，兼顾美学与交互流畅度。", icon: Layers },
   { title: "前端架构咨询", desc: "为团队提供技术选型、代码规范及性能优化建议。", icon: Zap },
   { title: "技术写作与培训", desc: "编写清晰的技术文档，进行内部技术分享与指导。", icon: BookOpen },
 ];
 
-const EXPERIENCE = [
+const EXPERIENCE: ExperienceItem[] = [
   {
     year: "2022 - 至今",
     role: "Senior Frontend Engineer",
@@ -324,7 +359,7 @@ const EXPERIENCE = [
 
 const BLOG_CATEGORIES = ["全部", "工程化", "设计", "职业思考", "生活"];
 
-const BLOG_POSTS = [
+const BLOG_POSTS: BlogPost[] = [
   {
     id: 1,
     title: "重构思维：从 MVC 到 Server Components",
@@ -376,12 +411,22 @@ const BLOG_POSTS = [
 // --- 高级组件 ---
 
 // 聚光灯效果卡片
-const SpotlightCard = ({ children, className = "", onClick }) => {
-  const divRef = useRef(null);
+type SpotlightCardProps = {
+  children: React.ReactNode;
+  className?: string;
+  onClick?: () => void;
+};
+
+const SpotlightCard = ({
+  children,
+  className = "",
+  onClick,
+}: SpotlightCardProps) => {
+  const divRef = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [opacity, setOpacity] = useState(0);
 
-  const handleMouseMove = (e) => {
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!divRef.current) return;
     const div = divRef.current;
     const rect = div.getBoundingClientRect();
@@ -411,8 +456,16 @@ const SpotlightCard = ({ children, className = "", onClick }) => {
   );
 };
 
+type NavItemProps = {
+  active: boolean;
+  onClick: () => void;
+  icon: React.ComponentType<{ size?: number }>;
+  label: string;
+  showLabel: boolean;
+};
+
 // 导航栏项
-const NavItem = ({ active, onClick, icon: Icon, label, showLabel }) => (
+const NavItem = ({ active, onClick, icon: Icon, label, showLabel }: NavItemProps) => (
   <button
     onClick={onClick}
     className={`relative flex items-center gap-2 px-2 sm:px-3 md:px-4 py-2 md:py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
@@ -434,7 +487,7 @@ const AIChatWidget = () => {
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const messagesEndRef = useRef(null);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -444,7 +497,7 @@ const AIChatWidget = () => {
     scrollToBottom();
   }, [messages, isOpen]);
 
-  const handleSend = async (e) => {
+  const handleSend = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!input.trim()) return;
 
@@ -581,14 +634,14 @@ export default function PersonalWebsite() {
   // 博客相关状态
   const [selectedCategory, setSelectedCategory] = useState("全部");
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedPost, setSelectedPost] = useState(null);
+  const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
 
   // Project Detail State
-  const [selectedProject, setSelectedProject] = useState(null);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [selectedProjectTag, setSelectedProjectTag] = useState("All"); 
   
   // AI Summary State
-  const [summary, setSummary] = useState(null);
+  const [summary, setSummary] = useState<string | null>(null);
   const [isSummarizing, setIsSummarizing] = useState(false);
 
   // 联系表单状态
@@ -615,7 +668,7 @@ export default function PersonalWebsite() {
 
   const toggleTheme = () => setDarkMode(!darkMode);
 
-  const handleTabChange = (tab) => {
+  const handleTabChange = (tab: string) => {
     setActiveTab(tab);
     setSelectedPost(null);
     setSelectedProject(null); 
@@ -669,7 +722,7 @@ export default function PersonalWebsite() {
     setIsSummarizing(false);
   };
 
-  const handleContactSubmit = (e) => {
+  const handleContactSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setFormStatus('submitting');
     setTimeout(() => {
@@ -1174,9 +1227,9 @@ export default function PersonalWebsite() {
                        </div>
                        
                        {/* ✨ Gemini AI Summary Button ✨ */}
-                       <button 
-                          onClick={handleGenerateSummary}
-                          disabled={isSummarizing || summary}
+                      <button 
+                         onClick={handleGenerateSummary}
+                         disabled={isSummarizing || Boolean(summary)}
                           className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white text-sm font-bold rounded-full shadow-lg hover:shadow-indigo-500/25 hover:scale-105 disabled:opacity-70 disabled:cursor-not-allowed transition-all"
                        >
                           {isSummarizing ? (
