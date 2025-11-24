@@ -247,24 +247,29 @@ const PROJECTS: Project[] = [
   },
   {
     id: 2,
-    title: "Aether Chat",
-    description: "基于 LLM 的智能助手，具备记忆上下文与多模态理解能力。集成了 LangChain 处理复杂任务链。",
-    tags: ["Next.js", "OpenAI", "Vector DB", "LangChain"],
-    link: "#",
+    title: "DataGrid Pro",
+    description: "纯前端 Excel 在线预览与编辑工具，支持 .xlsx/.xls 格式解析，数据完全本地处理，无需上传服务器。",
+    tags: ["React", "TypeScript", "SheetJS", "Next.js"],
+    link: "/DataGrid",
     github: "#",
     color: "from-emerald-400 to-cyan-500",
     content: `
-      <h3>产品愿景</h3>
-      <p>打造一个不仅仅是“聊天”，而是能真正理解用户意图并执行复杂任务流的 AI 助手。</p>
+      <h3>项目背景</h3>
+      <p>在日常工作中，经常需要快速预览 Excel 文件内容，但不想安装桌面软件或上传到云端。DataGrid Pro 旨在提供一个轻量、安全、即开即用的在线表格查看器。</p>
       
-      <h3>核心架构</h3>
-      <p>项目基于 <strong>Next.js 14 (App Router)</strong> 构建，使用 <strong>LangChain</strong> 编排 Agent 逻辑。为了保护用户隐私，我们引入了本地向量数据库进行知识库检索 (RAG)，敏感数据不上云。</p>
-      
-      <h3>特色功能</h3>
+      <h3>核心功能</h3>
       <ul>
-        <li><strong>多模态输入：</strong> 支持上传图片和文档进行分析。</li>
-        <li><strong>流式响应：</strong> 采用 RSC + Streaming 技术，实现打字机效果，降低首字节时间 (TTFB)。</li>
+        <li><strong>纯前端解析：</strong> 基于 SheetJS (XLSX.js) 库，所有数据处理都在浏览器本地完成，保护用户隐私。</li>
+        <li><strong>类 Excel 界面：</strong> 提供行号、列标（A/B/C...）、固定表头等熟悉的交互体验。</li>
+        <li><strong>在线编辑：</strong> 支持单元格内容直接编辑，修改后实时保存到内存中。</li>
+        <li><strong>大文件支持：</strong> 通过虚拟滚动和懒加载优化，可流畅处理数千行数据。</li>
       </ul>
+
+      <h3>技术实现</h3>
+      <p>项目采用 <strong>Next.js 16 (App Router)</strong> + <strong>React 19</strong> 构建，使用 <strong>SheetJS</strong> 进行 Excel 文件解析。动态加载 CDN 资源，减少初始包体积。表格渲染采用原生 HTML Table + CSS 固定定位实现行列冻结效果。</p>
+      
+      <h3>安全特性</h3>
+      <p>所有文件解析和数据处理均在客户端完成，数据不会上传到任何服务器，确保敏感信息的安全性。</p>
     `
   },
   {

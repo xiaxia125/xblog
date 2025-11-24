@@ -20,7 +20,7 @@ function generateTypeScriptInterfaces(jsonStr: string, rootName = 'RootObject') 
     parseObject(jsonObj as Record<string, unknown>, rootName, interfaces);
   } catch (err) {
     if (err instanceof Error) {
-      throw new Error("JSON 格式错误，请检查符号是否闭合");
+      throw new Error("JSON 格式错误，请检查");
     }
     throw err;
   }
